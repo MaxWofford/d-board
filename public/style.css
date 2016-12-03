@@ -1,0 +1,11 @@
+body {
+  height: 100%;
+  width: 100%;
+  color: black;
+  border: white solid 0px;
+}
+
+img {
+  max-width: 25%;
+  max-height: 25%;
+}
