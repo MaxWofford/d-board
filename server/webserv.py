@@ -53,7 +53,12 @@ def post_text():
     else:
         p.pos_z = rand(0,99)
     if('size' in request.form):
-        p.size = request.form['size']
+        if request.form['size'] is 'small' or \
+            request.form['size'] is 'medium' or \
+            request.form['size'] is 'large':
+            p.size = request.form['size']
+        else:
+            p.size = 'medium'
     else:
         p.size = rand(0,2)
     if('sender' in request.form):
