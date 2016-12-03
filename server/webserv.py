@@ -8,6 +8,35 @@ import server.models as models
 
 app = Flask(__name__)
 
+def dict_to_post(data,content_type):
+    p = models.Post(content=data['content'], content_type=content_type)
+    if('pos_x' in data):
+        p.pos_x = data['pos_x']
+    else:
+        p.pos_x = rand(0,99)
+    if('pos_y' in data):
+        p.pos_y = data['pos_y']
+    else:
+        p.pos_y = rand(0,99)
+    if('pos_z' in data):
+        p.pos_z = data['pos_z']
+    else:
+        p.pos_z = rand(0,99)
+    if('size' in data):
+        if data['size'] is 'small' or \
+            data['size'] is 'medium' or \
+            data['size'] is 'large':
+            p.size = data['size']
+        else:
+            p.size = 'medium'
+    else:
+        p.size = rand(0,2)
+    if('sender' in data):
+        p.sender = data['sender']
+    else:
+        p.sender = "Anon"
+    return p
+
 def post_to_dict(post):
     return {
             'id':post.id,
@@ -39,59 +68,14 @@ def delete_post(id):
 
 @app.route("/post/text/", methods=['POST'])
 def post_text():
-    p = models.Post(content=request.form['content'], content_type="text")
-    if('pos_x' in request.form):
-        p.pos_x = request.form['pos_x']
-    else:
-        p.pos_x = rand(0,99)
-    if('pos_y' in request.form):
-        p.pos_y = request.form['pos_y']
-    else:
-        p.pos_y = rand(0,99)
-    if('pos_z' in request.form):
-        p.pos_z = request.form['pos_z']
-    else:
-        p.pos_z = rand(0,99)
-    if('size' in request.form):
-        if request.form['size'] is 'small' or \
-            request.form['size'] is 'medium' or \
-            request.form['size'] is 'large':
-            p.size = request.form['size']
-        else:
-            p.size = 'medium'
-    else:
-        p.size = rand(0,2)
-    if('sender' in request.form):
-        p.sender = request.form['sender']
-    else:
-        p.sender = "Anon"
+    p = dict_to_post(request.form, content_type="text")
     db.add(p)
     db.commit()
     return redirect('dashboard')
 
 @app.route("/post/photo/", methods=['POST'])
 def post_photo():
-    p = models.Post(content=request.form['content'], content_type="image-url")
-    if('pos_x' in request.form):
-        p.pos_x = request.form['pos_x']
-    else:
-        p.pos_x = rand(0,99)
-    if('pos_y' in request.form):
-        p.pos_y = request.form['pos_y']
-    else:
-        p.pos_y = rand(0,99)
-    if('pos_z' in request.form):
-        p.pos_z = request.form['pos_z']
-    else:
-        p.pos_z = rand(0,99)
-    if('size' in request.form):
-        p.size = request.form['size']
-    else:
-        p.size = rand(0,2)
-    if('sender' in request.form):
-        p.sender = request.form['sender']
-    else:
-        p.sender = "Anon"
+    p = dict_to_post(request.form, content_type="image-url")
     db.add(p)
     db.commit()
     return redirect('dashboard')
