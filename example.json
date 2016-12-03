@@ -1,29 +1,29 @@
 // GET /dashboard.json
 
 {
-  [
+  "boards": [
     {
-      type: 'image-url',
-      sender: 'Bort Fargler',
-      timestamp: '1480730880099',
-      content: 'someurl.png',
-      size: 'small',
-      location: {
-        x: 42,
-        y: 24,
-        z: 9
+      "type": "image-url",
+      "sender": "Bort Fargler",
+      "timestamp": 1480730880099,
+      "content": "img.jpg",
+      "size": "small",
+      "location": {
+        "x": 42,
+        "y": 24,
+        "z": 9
       }
     },
     {
-      type: 'text',
-      sender: 'Dirk Gentley',
-      timestamp: '1480730880019',
-      content: 'I solved it!',
-      size: 'medium',
-      location: {
-        x: 42,
-        y: 24,
-        z: 9
+      "type": "text",
+      "sender": "Dirk Gentley",
+      "timestamp": 1480730880019,
+      "content": "I solved it!",
+      "size": "medium",
+      "location": {
+        "x": 42,
+        "y": 24,
+        "z": 9
       }
     }
   ]
