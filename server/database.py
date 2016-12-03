@@ -6,7 +6,7 @@ from sqlalchemy.ext.declarative import declarative_base
 engine_url = 'sqlite:///dboard.db'
 if 'DB_URL' in os.environ:
     engine_url = os.environ['DB_URL']
-engine = create_engine('sqlite:///dboard.db', convert_unicode=True)
+engine = create_engine(engine_url, convert_unicode=True)
 session = scoped_session(sessionmaker(autocommit=False,
                                       autoflush=False,
                                       bind=engine))
