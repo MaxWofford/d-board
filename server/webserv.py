@@ -68,14 +68,14 @@ def delete_post(id):
 
 @app.route("/post/text/", methods=['POST'])
 def post_text():
-    p = dict_to_post(request.form, content_type="text")
+    p = dict_to_post(request.get_json(), content_type="text")
     db.add(p)
     db.commit()
     return redirect('dashboard')
 
 @app.route("/post/photo/", methods=['POST'])
 def post_photo():
-    p = dict_to_post(request.form, content_type="image-url")
+    p = dict_to_post(request.get_json(), content_type="image-url")
     db.add(p)
     db.commit()
     return redirect('dashboard')
