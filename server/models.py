@@ -10,7 +10,7 @@ class Post(Base):
     timestamp = Column(DateTime, server_default=func.now())
     content_type = Column(String(16))
     content = Column(Text)
-    size = Column(Integer)
+    size = Column(String(32))
     pos_x = Column(Integer)
     pos_y = Column(Integer)
     pos_z = Column(Integer)
