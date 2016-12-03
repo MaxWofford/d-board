@@ -52,3 +52,20 @@ img.large {
   top:10px;
   left:10px;
 }
+
+#input-container {
+  /* transform: translate(50%, 50%); */
+  position: fixed;
+  top: 0px;
+  left: 0px;
+}
+
+button {
+  border-radius: 50%;
+  background: white;
+  border: 1px solid black;
+}
+
+.hidden {
+  display: none;
+}

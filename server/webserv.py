@@ -24,8 +24,8 @@ def post_to_dict(post):
         }
 
 @app.route("/")
-def hello():
-    return "<h1 style='color:red'>Hello There!</h1>"
+def form():
+    return send_from_directory('static','form.html')
 
 @app.route("/dashboard")
 def dashboard():

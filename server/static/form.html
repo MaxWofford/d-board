@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="/static/reset.css">
+    <link rel="stylesheet" href="/static/style.css">
+    <script src="/static/script.js"></script>
+  </head>
+  <body>
+    <div class="dashboard-container"></div>
+    <img class="csh-overlay" src="/static/csh-logo-brush.png"/>
+    <img class="logo-overlay" src="/static/marker.png"/>
+    <div id="input-container" class="hidden">
+      <input type="text" id="post-input">
+      <input type="hidden" id="x-pos">
+      <input type="hidden" id="y-pos">
+      <button class="submit-small" onclick="submit('small')">Whisper</button>
+      <button class="submit-medium" onclick="submit('medium')">Say</button>
+      <button class="submit-large" onclick="submit('large')">Shout</button>
+    </div>
+    <script>
+     // Load up the page view
+     updateView()
+
+     // Set up onclick handlers
+     document.body.addEventListener('click', clickHandler, true)
+    </script>
+  </body>
+</html>

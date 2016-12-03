@@ -55,3 +55,32 @@ let processJSON = data => {
   }
 }
 
+// form logic
+let clickHandler = event => {
+  let input = document.querySelector('#post-input')
+  input.select()
+  let inputContainer = document.querySelector('#input-container')
+  inputContainer.className = ''
+  inputContainer.setAttribute('style', `left: ${event.clientX}px; top: ${event.clientY}px;`)
+}
+
+let submit = size => {
+  let type = 'text' // TODO: don't hardcode this
+  let params = {
+    size: size,
+    content: document.querySelector('#post-input').value,
+    pos_x: document.querySelector('#x-pos'),
+    pos_y: document.querySelector('#y-pos'),
+    pos_z: 0
+  }
+  fetch(`${URL}/post/${type}`, {
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+          method: "POST",
+          body: JSON.stringify(params)
+  }).then(res => {
+    updateView()
+  })
+}
