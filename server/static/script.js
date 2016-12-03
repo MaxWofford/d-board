@@ -41,18 +41,20 @@ let updateView = () => {
 }
 
 let processJSON = data => {
-  let timestamps = data.boards.map(board => {
-    return board.timestamp
-  })
-  let mostRecentTimestamp = Math.max.apply(null, timestamps)
-  if (mostRecentTimestamp > updatedAt) {
-    dashboard.innerHTML = ''
-    data.boards.map(createBoard)
-    data.boards.map(board => {console.log(board)})
-    updatedAt = mostRecentTimestamp
+  if (data && data.boards) {
+    let timestamps = data.boards.map(board => {
+      return board.timestamp
+    })
+    let mostRecentTimestamp = Math.max.apply(null, timestamps)
+    if (mostRecentTimestamp > updatedAt) {
+      dashboard.innerHTML = ''
+      data.boards.map(createBoard)
+      data.boards.map(board => {console.log(board)})
+      updatedAt = mostRecentTimestamp
+    }
   }
 }
 
 // Update the view every 5 seconds
 updateView()
-setTimeout(updateView, 5000)
+setInterval(updateView, 5000)
