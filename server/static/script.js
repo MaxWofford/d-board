@@ -24,6 +24,9 @@ let createBoard = board => {
     el = newImageBoard(board)
   }
   el.className += board.size
+  let style = `bottom: ${board.location.y}%;`
+  style += `right: ${board.location.x}%;`
+  el.setAttribute('style', style)
   dashboard.appendChild(el)
 }
 
