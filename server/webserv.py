@@ -29,9 +29,36 @@ def hello():
 def dashboard():
     return send_from_directory('static','index.html')
 
-@app.route("/post/text/<text>")
-def post_text(text):
-    p = models.Post(content=text, content_type="text")
+@app.route("/post/text/", methods=['POST'])
+def post_text():
+    p = models.Post(content=request.form['content'], content_type="text")
+    if('pos_x' in request.form):
+        p.pos_x = request.form['pos_x']
+    if('pos_y' in request.form):
+        p.pos_y = request.form['pos_y']
+    if('pos_z' in request.form):
+        p.pos_z = request.form['pos_z']
+    if('size' in request.form):
+        p.size = request.form['size']
+    if('sender' in request.form):
+        p.sender = request.form['sender']
+    db.add(p)
+    db.commit()
+    return redirect('dashboard')
+
+@app.route("/post/photo/", methods=['POST'])
+def post_photo():
+    p = models.Post(content=request.form['content'], content_type="image-url")
+    if('pos_x' in request.form):
+        p.pos_x = request.form['pos_x']
+    if('pos_y' in request.form):
+        p.pos_y = request.form['pos_y']
+    if('pos_z' in request.form):
+        p.pos_z = request.form['pos_z']
+    if('size' in request.form):
+        p.size = request.form['size']
+    if('sender' in request.form):
+        p.sender = request.form['sender']
     db.add(p)
     db.commit()
     return redirect('dashboard')
