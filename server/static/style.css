@@ -5,7 +5,33 @@ body {
   border: white solid 0px;
 }
 
-img {
-  max-width: 25%;
+p, img {
+  position: fixed;
+}
+
+p.small {
+  font-size: 1em;
+}
+
+p.medium {
+  font-size: 2em;
+}
+
+p.large {
+  font-size: 3em;
+}
+
+img.small {
+  max-height: 10%;
+  max-width: 10%;
+}
+
+img.medium {
   max-height: 25%;
+  max-width: 25%;
+}
+
+img.large {
+  max-height: 50%;
+  max-width: 50%;
 }

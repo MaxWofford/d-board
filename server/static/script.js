@@ -23,7 +23,7 @@ let createBoard = board => {
   } else if (board.type == 'image-url') {
     el = newImageBoard(board)
   }
-  el.class = board.size
+  el.className += board.size
   dashboard.appendChild(el)
 }
 
