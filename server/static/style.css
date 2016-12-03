@@ -40,3 +40,21 @@ img.large {
   max-height: 50%;
   max-width: 50%;
 }
+
+.csh-overlay {
+    width:10%;
+    bottom:0;
+    left:0;
+}
+
+.logo-overlay {
+    width:10%;
+    top:0;
+    right:0;
+}
+
+.edit-overlay {
+    width:10%;
+    bottom:0;
+    right:0;
+}
