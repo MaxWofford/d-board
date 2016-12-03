@@ -3,11 +3,16 @@
   <head>
     <link rel="stylesheet" href="/static/reset.css">
     <link rel="stylesheet" href="/static/style.css">
-    <script defer src="/static/script.js"></script>
+    <script src="/static/script.js"></script>
   </head>
   <body>
     <div class="dashboard-container"></div>
     <img class="csh-overlay" src="/static/csh-logo-brush.png"/>
     <img class="logo-overlay" src="/static/marker.png"/>
+    <script>
+     // Update the view every 5 seconds
+     updateView()
+     setInterval(updateView, 5000)
+    </script>
   </body>
 </html>

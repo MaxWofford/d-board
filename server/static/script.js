@@ -55,6 +55,3 @@ let processJSON = data => {
   }
 }
 
-// Update the view every 5 seconds
-updateView()
-setInterval(updateView, 5000)
