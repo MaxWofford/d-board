@@ -1,12 +1,10 @@
-// GET /dashboard.json
-
 {
   "boards": [
     {
       "type": "image-url",
       "sender": "Bort Fargler",
       "timestamp": 1480730880099,
-      "content": "img.jpg",
+      "content": "http://images.amcnetworks.com/bbcamerica.com/wp-content/uploads/2013/08/Welsh-Corgi-.jpg",
       "size": "small",
       "location": {
         "x": 42,
