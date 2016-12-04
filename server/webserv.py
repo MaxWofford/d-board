@@ -23,14 +23,9 @@ def dict_to_post(data,content_type):
     else:
         p.pos_z = rand(0,99)
     if('size' in data):
-        if data['size'] is 'small' or \
-            data['size'] is 'medium' or \
-            data['size'] is 'large':
-            p.size = data['size']
-        else:
-            p.size = 'medium'
+        p.size = data['size']
     else:
-        p.size = rand(0,2)
+        p.size = 'medium'
     if('sender' in data):
         p.sender = data['sender']
     else:
@@ -53,12 +48,12 @@ def post_to_dict(post):
         }
 
 @app.route("/")
-def hello():
-    return "<h1 style='color:red'>Hello There!</h1>"
+def form():
+    return send_from_directory('static','form.html')
 
 @app.route("/dashboard")
 def dashboard():
-    return send_from_directory('static','index.html')
+    return send_from_directory('static','dashboard.html')
 
 @app.route("/post/<int:id>/delete", methods=['POST'])
 def delete_post(id):
@@ -66,19 +61,19 @@ def delete_post(id):
     db.commit()
     return redirect('dashboard')
 
-@app.route("/post/text/", methods=['POST'])
+@app.route("/post/text", methods=['POST'])
 def post_text():
-    p = dict_to_post(request.form, content_type="text")
+    p = dict_to_post(request.get_json(), content_type="text")
     db.add(p)
     db.commit()
-    return redirect('dashboard')
+    return jsonify(post_to_dict(p))
 
-@app.route("/post/photo/", methods=['POST'])
+@app.route("/post/photo", methods=['POST'])
 def post_photo():
-    p = dict_to_post(request.form, content_type="image-url")
+    p = dict_to_post(request.get_json(), content_type="image-url")
     db.add(p)
     db.commit()
-    return redirect('dashboard')
+    return jsonify(post_to_dict(p))
 
 @app.route("/dashboard.json")
 def dashboard_json():
