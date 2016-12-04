@@ -106,6 +106,7 @@ let submit = size => {
       'Content-Type': 'application/json'
     },
     method: "POST",
+    credentials: "same-origin",
     body: JSON.stringify(params)
   }).then(res => {
     document.querySelector('#input-container').className = 'hidden'
