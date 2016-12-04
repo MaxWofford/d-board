@@ -46,7 +46,7 @@ let processJSON = data => {
     let timestamps = data.boards.map(board => {
         return board.timestamp;
     });
-      let mostRecentTimestamp = Math.max.apply(null, timestamps);
+    let mostRecentTimestamp = Math.max.apply(null, timestamps);
     if (mostRecentTimestamp > updatedAt) {
         dashboard.innerHTML = '';
         data.boards.map(createBoard);
@@ -66,26 +66,29 @@ let clickHandler = event => {
 };
 
 let submit = size => {
-  let type = 'text'; // TODO: don't hardcode this
-  let input = document.querySelector('#post-input');
-  let pos_x = parseInt(input.getBoundingClientRect().left/window.innerWidth*100);
-  let pos_y = parseInt(input.getBoundingClientRect().top/window.innerHeight*100);
-  let params = {
-    size: size,
-    content: input.value,
-    pos_x: parseInt(pos_x),
-    pos_y: parseInt(pos_y),
-    pos_z: 0
-  };
-  fetch(`${URL}/post/${type}`, {
-          headers: {
+    let type = 'text';
+    let input = document.querySelector('#post-input');
+    if(/^(?:(?:(?:https?|ftp):)?\/\/).*/i.test(input.value)) {
+        type="photo";
+    }
+    let pos_x = parseInt(input.getBoundingClientRect().left/window.innerWidth*100);
+    let pos_y = parseInt(input.getBoundingClientRect().top/window.innerHeight*100);
+    let params = {
+        size: size,
+        content: input.value,
+        pos_x: parseInt(pos_x),
+        pos_y: parseInt(pos_y),
+        pos_z: 0
+    };
+    fetch(`${URL}/post/${type}`, {
+        headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
-          },
-          method: "POST",
-          body: JSON.stringify(params)
-  }).then(res => {
-      document.querySelector('#input-container').className= 'hidden';
-      updateView();
-  });
-}
+        },
+        method: "POST",
+        body: JSON.stringify(params)
+    }).then(res => {
+        document.querySelector('#input-container').className= 'hidden';
+        updateView();
+    });
+};
