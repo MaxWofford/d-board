@@ -101,7 +101,7 @@ def post_photo():
     return jsonify(post_to_dict(p))
 
 @app.route("/post/youtube", methods=['POST'])
-@app.oidc_auth
+@auth.oidc_auth
 def post_youtube():
     p = dict_to_post(request.get_json(), content_type="youtube-id")
     db.add(p)
