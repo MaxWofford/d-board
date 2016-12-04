@@ -79,7 +79,7 @@ def post_photo():
 def dashboard_json():
     posts = models.Post.query.order_by(desc(models.Post.timestamp)).limit(10).all()
     resp = []
-    for post in posts:
+    for post in reversed(posts):
         resp.append(post_to_dict(post))
     return jsonify({"boards":resp})
 
