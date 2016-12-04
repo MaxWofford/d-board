@@ -11,6 +11,7 @@ import os
 
 app = Flask(__name__)
 app.config['SERVER_NAME'] = os.environ.get('SERVER_NAME','d-board.app.csh.rit.edu')
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY','d-board-illuminati')
 
 # Disable SSL certificate verification warning
 requests.packages.urllib3.disable_warnings()
