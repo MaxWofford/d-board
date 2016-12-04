@@ -10,7 +10,7 @@ html, body, .dashboard-container {
   font-family: "Whiteboard", sans-serif;
 }
 
-p, img {
+p, img, iframe {
   position: fixed;
 }
 
@@ -54,7 +54,6 @@ img.large {
 }
 
 #input-container {
-  /* transform: translate(50%, 50%); */
   position: fixed;
   top: 0px;
   left: 0px;
@@ -68,4 +67,9 @@ button {
 
 .hidden {
   display: none;
+}
+
+img {
+  user-drag: none;
+  user-select: none;
 }

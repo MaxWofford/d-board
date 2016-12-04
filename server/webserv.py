@@ -75,6 +75,13 @@ def post_photo():
     db.commit()
     return jsonify(post_to_dict(p))
 
+@app.route("/post/youtube", methods=['POST'])
+def post_youtube():
+    p = dict_to_post(request.get_json(), content_type="youtube-id")
+    db.add(p)
+    db.commit()
+    return jsonify(post_to_dict(p))
+
 @app.route("/dashboard.json")
 def dashboard_json():
     posts = models.Post.query.order_by(desc(models.Post.timestamp)).limit(10).all()

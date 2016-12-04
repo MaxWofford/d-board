@@ -4,6 +4,12 @@ const URL = window.location.origin;
 const dashboard = document.querySelector('.dashboard-container');
 let updatedAt = 0;
 
+let newYoutubeBoard = board => {
+  let el = document.createElement('iframe');
+  el.src = `https://www.youtube.com/embed/${board.content}?version=3&autoplay=1&autohide=1&controls=0&showinfo=0&loop=1&iv_load_policy=3&playlist=${board.content}`
+  return el
+}
+
 let newTextBoard = board => {
   let el = document.createElement('p');
   el.appendChild(document.createTextNode(board.content));
@@ -17,11 +23,14 @@ let newImageBoard = board => {
 };
 
 let createBoard = board => {
+  console.log(board)
   let el;
   if (board.type == 'text') {
     el = newTextBoard(board);
   } else if (board.type == 'image-url') {
     el = newImageBoard(board);
+  } else if (board.type == 'youtube-id') {
+    el = newYoutubeBoard(board)
   }
   el.className += board.size;
   let style = `top: ${board.location.y}%;`;
@@ -65,14 +74,23 @@ let clickHandler = event => {
   inputContainer.setAttribute('style', `left: ${event.clientX}px; top: ${event.clientY}px;`);
 };
 
+let youtubeParse = url => {
+  var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
+  var match = url.match(regExp);
+  return (match&&match[7].length==11)? match[7] : false;
+}
+
 let submit = size => {
+  let input = document.querySelector('#post-input');
   let content = input.value
   if (content == '') {
     return
   }
   let type = 'text';
-  let input = document.querySelector('#post-input');
-  if(/^(?:(?:(?:https?|ftp):)?\/\/).*/i.test(input.value)) {
+  if (/^(https?\:\/\/)?(www\.)?(youtube\.com|youtu\.?be)\/.+$/i.test(content)) {
+    type="youtube"
+    content = youtubeParse(content)
+  } else if (/^(?:(?:(?:https?|ftp):)?\/\/).*/i.test(content)) {
     type="photo";
   }
   let pos_x = parseInt(input.getBoundingClientRect().left/window.innerWidth*100);
