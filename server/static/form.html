@@ -3,7 +3,6 @@
   <head>
     <link rel="stylesheet" href="/static/reset.css">
     <link rel="stylesheet" href="/static/style.css">
-    <script src="/static/script.js"></script>
   </head>
   <body>
     <div class="dashboard-container"></div>
@@ -17,12 +16,13 @@
       <button class="submit-medium" onclick="submit('medium')">Say</button>
       <button class="submit-large" onclick="submit('large')">Shout</button>
     </div>
+    <script src="/static/script.js"></script>
     <script>
      // Load up the page view
      updateView()
 
      // Set up onclick handlers
-     document.body.addEventListener('click', clickHandler, true)
+     document.body.addEventListener('dblclick', clickHandler, true)
     </script>
   </body>
 </html>

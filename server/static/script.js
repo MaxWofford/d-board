@@ -24,8 +24,8 @@ let createBoard = board => {
       el = newImageBoard(board);
   }
     el.className += board.size;
-    let style = `bottom: ${board.location.y}%;`;
-    style += `right: ${board.location.x}%;`;
+    let style = `top: ${board.location.y}%;`;
+    style += `left: ${board.location.x}%;`;
     el.setAttribute('style', style);
     dashboard.appendChild(el);
 };
@@ -67,11 +67,14 @@ let clickHandler = event => {
 
 let submit = size => {
   let type = 'text'; // TODO: don't hardcode this
+  let input = document.querySelector('#post-input');
+  let pos_x = parseInt(input.getBoundingClientRect().left/window.innerWidth*100);
+  let pos_y = parseInt(input.getBoundingClientRect().top/window.innerHeight*100);
   let params = {
     size: size,
-    content: document.querySelector('#post-input').value,
-    pos_x: document.querySelector('#x-pos'),
-    pos_y: document.querySelector('#y-pos'),
+    content: input.value,
+    pos_x: parseInt(pos_x),
+    pos_y: parseInt(pos_y),
     pos_z: 0
   };
   fetch(`${URL}/post/${type}`, {
@@ -82,6 +85,7 @@ let submit = size => {
           method: "POST",
           body: JSON.stringify(params)
   }).then(res => {
+      document.querySelector('#input-container').className= 'hidden';
       updateView();
   });
 }
